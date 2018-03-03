@@ -55,10 +55,6 @@ public class Document {
         return Number;
     }
 
-    public void setNumber(String Number) {
-        this.Number = Number;
-    }
-
     @Override
     public String toString() {
         return Number;
