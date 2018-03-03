@@ -26,4 +26,8 @@ public class Address {
         this.BillingAddress = BillingAddress;
     }
     
+    @Override
+    public String toString(){
+        return HomeAddress;
+    }
 }
