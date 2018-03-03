@@ -3,6 +3,7 @@ package alis.store.domain.ValueObjects;
 import java.util.regex.Pattern;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
+import javax.validation.constraints.AssertTrue;
 
 public class Document {
     
@@ -13,11 +14,12 @@ public class Document {
     @Positive(message = "Only numbers are permitted")
     private String Number;
     
+    @AssertTrue(message = "Invalid document.")
     private final boolean IsValid;
     
     public Document(String Number) {
         this.Number = Number;
-        IsValid = isValid(Number);
+        this.IsValid = isValid(Number);
     }
     
     private boolean isValid(String cpf) {
