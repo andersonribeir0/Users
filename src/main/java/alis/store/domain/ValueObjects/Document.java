@@ -1,8 +1,14 @@
 package alis.store.domain.ValueObjects;
 
-public class Document {
-    private String Number;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 
+public class Document {
+    
+    @Size(min = 11, max = 11, message = "Document must has 11 characters")
+    @Positive(message = "Only numbers are permitted")
+    private String Number;
+    
     public Document(String Number) {
         this.Number = Number;
     }
@@ -19,6 +25,5 @@ public class Document {
     public String toString() {
         return Number;
     }
-    
     
 }
