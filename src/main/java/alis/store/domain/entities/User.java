@@ -7,11 +7,12 @@ import alis.store.domain.ValueObjects.Document;
 import alis.store.shared.enums.EType;
 
 public class User {
-    Name Name;
-    Address Address;
-    Email Email;
-    Document Document;
-    EType Type;
+    
+    private Name Name;
+    private Address Address;
+    private Email Email;
+    private Document Document;
+    private EType Type;
     
     @Override
     public String toString(){
