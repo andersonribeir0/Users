@@ -1,8 +1,13 @@
 package alis.store.domain.ValueObjects;
 
+import javax.validation.constraints.NotNull;
+
 public class Address {
     
+    @NotNull(message = "Billing address is required")
     private String BillingAddress;
+    
+    @NotNull(message = "Home address is required")
     private String HomeAddress;
 
     public Address(String BillingAddress, String HomeAddress) {
