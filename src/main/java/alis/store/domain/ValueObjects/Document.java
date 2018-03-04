@@ -57,6 +57,10 @@ public class Document {
         return Number;
     }
 
+    public boolean isValid() {
+        return IsValid;
+    }
+    
     @Override
     public String toString() {
         return Number;
