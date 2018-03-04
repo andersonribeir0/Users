@@ -1,13 +1,17 @@
 package alis.store.domain.entities;
 
-import alis.store.domain.ValueObjects.Address;
-import alis.store.domain.ValueObjects.Email;
-import alis.store.domain.ValueObjects.Name;
+import alis.store.domain.valueObjects.Address;
+import alis.store.domain.valueObjects.Email;
+import alis.store.domain.valueObjects.Name;
 
-import alis.store.domain.ValueObjects.Document;
+import alis.store.domain.valueObjects.Document;
+import alis.store.shared.Entity;
 import alis.store.shared.enums.EType;
 
-public class User {
+import java.util.ArrayList;
+import java.util.List;
+
+public class User extends Entity{
     
     private Name Name;
     private Address Address;

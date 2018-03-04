@@ -1,28 +1,10 @@
 package ValueObjects;
 
-import alis.store.domain.ValueObjects.Document;
+import alis.store.domain.valueObjects.Document;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.ValidatorFactory;
-import java.util.Set;
 
 public class DocumentTest {
-
-    private static javax.validation.Validator validator;
-
-
-    @BeforeAll
-    public static void setUp(){
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        validator = factory.getValidator();
-    }
-
 
     @Test
     public void Should_Return_True_If_Document_Is_Valid() {
@@ -38,10 +20,4 @@ public class DocumentTest {
         assertTrue(isInvalid);
     }
 
-    @Test
-    public void Should_Return_False_If_Document_Length_Is_Different_Then_Eleven(){
-        Document invalidDocument = new Document("123");
-        Set<ConstraintViolation<Document>> violations = validator.validate(invalidDocument);
-       assertTrue(!violations.isEmpty());
-    }
 }
