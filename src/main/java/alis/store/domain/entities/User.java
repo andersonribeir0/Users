@@ -6,10 +6,7 @@ import alis.store.domain.valueObjects.Name;
 
 import alis.store.domain.valueObjects.Document;
 import alis.store.shared.Entity;
-import alis.store.shared.enums.EType;
-
-import java.util.ArrayList;
-import java.util.List;
+import alis.store.domain.enums.EType;
 
 public class User extends Entity{
     

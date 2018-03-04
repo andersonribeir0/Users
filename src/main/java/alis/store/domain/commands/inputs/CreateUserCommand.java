@@ -1,7 +1,7 @@
 package alis.store.domain.commands.inputs;
 
 import alis.store.shared.commands.ICommand;
-import alis.store.shared.enums.EType;
+import alis.store.domain.enums.EType;
 
 public class CreateUserCommand implements ICommand {
     public String FirstName;
