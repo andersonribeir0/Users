@@ -16,7 +16,7 @@ public class Document {
     
     @AssertTrue(message = "Invalid document.")
     private final boolean IsValid;
-    
+
     public Document(String Number) {
         this.Number = Number;
         this.IsValid = isValid(Number);
@@ -60,6 +60,8 @@ public class Document {
     public boolean isValid() {
         return IsValid;
     }
+
+    public boolean isInvalid() {return !isValid(this.Number);}
     
     @Override
     public String toString() {
