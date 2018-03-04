@@ -10,8 +10,6 @@ import alis.store.domain.valueObjects.Name;
 import alis.store.shared.commands.ICommandHandler;
 import alis.store.shared.commands.ICommandResult;
 import alis.store.domain.entities.User;
-import org.junit.platform.commons.util.StringUtils;
-import sun.tools.java.Environment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +21,6 @@ public class UserHandler implements ICommandHandler<CreateUserCommand> {
     public UserHandler(IUserRepository repository) {
         Repository = repository;
         Notifications = new ArrayList<>();
-
     }
 
     public ICommandResult Handle(CreateUserCommand command) throws Exception{
@@ -48,9 +45,9 @@ public class UserHandler implements ICommandHandler<CreateUserCommand> {
             CreateUserCommandResult result = new CreateUserCommandResult();
             result.Id = user.getId();
             return result;
-        } else {
-            String exceptionMessage = String.join(",",Notifications);
-            throw new Exception(exceptionMessage);
         }
+
+        String exceptionMessage = String.join(",",Notifications);
+        throw new Exception(exceptionMessage);
     }
 }
