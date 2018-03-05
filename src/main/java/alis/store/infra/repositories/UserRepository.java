@@ -33,4 +33,8 @@ public class UserRepository implements IUserRepository{
         users.add(user);
     }
 
+    public List<User> GetAll(){
+        return users;
+    }
+
 }

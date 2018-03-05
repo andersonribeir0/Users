@@ -1,4 +1,4 @@
-package Handlers;
+package handlers;
 
 import alis.store.domain.commands.inputs.CreateUserCommand;
 import alis.store.domain.enums.EType;
