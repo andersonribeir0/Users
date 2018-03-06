@@ -14,15 +14,23 @@ import alis.store.domain.entities.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserHandler implements ICommandHandler<CreateUserCommand> {
-    private IUserRepository Repository;
-    private List<String> Notifications;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
+public class UserHandler implements ICommandHandler<CreateUserCommand> {
+    
+	private IUserRepository Repository;
+    
+	private List<String> Notifications;
+	
+	@Autowired
     public UserHandler(IUserRepository repository) {
         Repository = repository;
         Notifications = new ArrayList<>();
     }
 
+    @Override
     public ICommandResult Handle(CreateUserCommand command) throws Exception{
 
         if (Repository.CheckIfEmailAlreadyExists(command.Email))
