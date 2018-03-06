@@ -21,7 +21,7 @@ public class UserRepository implements IUserRepository{
 
     public boolean CheckIfEmailAlreadyExists(String email) {
         for (User user : users){
-            if (user.getEmail().toString() == email)
+            if (user.getEmail().toString().equals(email))
                 return true;
         }
         return false;
@@ -29,7 +29,7 @@ public class UserRepository implements IUserRepository{
 
     public boolean CheckIfDocumentAlreadyExists(String document) {
         for (User user : users){
-            if (user.getDocument().toString() == document)
+            if (user.getDocument().toString().equals(document))
                 return true;
         }
         return false;
