@@ -1,6 +1,7 @@
 package alis.store.domain.queries;
 
-public class QueryAllUsersResult {
+public class QueryUsersResult {
+    public String Id;
     public String Name;
     public String Email;
     public String Address;

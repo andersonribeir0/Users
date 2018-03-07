@@ -25,6 +25,7 @@ public class UserRepositoryTest {
     @Test
     public void Should_Return_True_If_Document_Already_Exists(){
         repository.AddUser(user);
+        Document document = new Document("76583352311");
         boolean result = repository.CheckIfDocumentAlreadyExists(document.toString());
         assertTrue(result);
     }
@@ -32,6 +33,7 @@ public class UserRepositoryTest {
     @Test
     public void Should_Return_True_If_Email_Already_Exists(){
         repository.AddUser(user);
+        Email email = new Email("abc@gmail.com");
         boolean result = repository.CheckIfEmailAlreadyExists(email.toString());
         assertTrue(result);
     }

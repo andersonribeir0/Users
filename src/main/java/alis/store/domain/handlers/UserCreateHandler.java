@@ -1,12 +1,16 @@
 package alis.store.domain.handlers;
 
 import alis.store.domain.commands.inputs.CreateUserCommand;
+import alis.store.domain.commands.inputs.DeleteUserCommand;
 import alis.store.domain.commands.outputs.CreateUserCommandResult;
+import alis.store.domain.commands.outputs.DeleteUserCommandResult;
+import alis.store.domain.queries.QueryUsersResult;
 import alis.store.domain.repositories.IUserRepository;
 import alis.store.domain.valueObjects.Address;
 import alis.store.domain.valueObjects.Document;
 import alis.store.domain.valueObjects.Email;
 import alis.store.domain.valueObjects.Name;
+import alis.store.shared.commands.ICommand;
 import alis.store.shared.commands.ICommandHandler;
 import alis.store.shared.commands.ICommandResult;
 import alis.store.domain.entities.User;
@@ -18,19 +22,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserHandler implements ICommandHandler<CreateUserCommand> {
+public class UserCreateHandler implements ICommandHandler<CreateUserCommand> {
     
 	private IUserRepository Repository;
     
 	private List<String> Notifications;
 	
 	@Autowired
-    public UserHandler(IUserRepository repository) {
+    public UserCreateHandler(IUserRepository repository) {
         Repository = repository;
         Notifications = new ArrayList<>();
     }
 
-    @Override
     public ICommandResult Handle(CreateUserCommand command) throws Exception{
 
         if (Repository.CheckIfEmailAlreadyExists(command.Email))
@@ -58,4 +61,7 @@ public class UserHandler implements ICommandHandler<CreateUserCommand> {
         String exceptionMessage = String.join(",",Notifications);
         throw new Exception(exceptionMessage);
     }
+
+
+
 }
