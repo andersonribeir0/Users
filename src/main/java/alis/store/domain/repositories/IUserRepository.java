@@ -14,4 +14,5 @@ public interface IUserRepository {
     boolean DeleteUser(String document);
     boolean UpdateUser(String id, User user);
     QueryUsersResult GetById(String id);
+    User getUserByDocument (String document);
 }

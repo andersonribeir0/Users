@@ -41,6 +41,15 @@ public class UserRepository implements IUserRepository {
         users.add(user);
     }
 
+    public User getUserByDocument (String document){
+        for (User user : users) {
+            if (user.getDocument().toString().equals(document)) {
+               return user;
+            }
+        }
+        return null;
+    }
+
     public List<QueryUsersResult> GetAll() {
         List<QueryUsersResult> allUsers = new ArrayList<>();
         for (User user : users) {
