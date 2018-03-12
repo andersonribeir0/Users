@@ -2,6 +2,7 @@ package alis.store.infra.security.config;
 
 import alis.store.infra.security.JwtAuthenticationEntryPoint;
 import alis.store.infra.security.JwtAuthenticationTokenFilter;
+import alis.store.infra.security.JwtAuthorizationTokenFilter;
 import alis.store.infra.security.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -51,6 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .anyRequest().authenticated();
 
         httpSecurity.addFilter(new JwtAuthenticationTokenFilter(authenticationManager(), jwtTokenUtil));
+        httpSecurity.addFilter(new JwtAuthorizationTokenFilter(authenticationManager(), jwtTokenUtil, userDetailsService));
 
         httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }

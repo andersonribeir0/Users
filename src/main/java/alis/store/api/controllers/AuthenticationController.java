@@ -57,11 +57,11 @@ public class AuthenticationController {
         String username = jwtTokenUtil.getUserNameFromToken(token);
         final User user = repository.getUserByDocument(username);
 
-        if(jwtTokenUtil.canTokenBeRefreshed(token)){
-            String refreshedToken = jwtTokenUtil.refreshToken(token);
-            return ResponseEntity.ok(new CurrentUser(refreshedToken, user));
-        } else {
-            return ResponseEntity.badRequest().body(null);
-        }
+      //  if(jwtTokenUtil.canTokenBeRefreshed(token)){
+      //      String refreshedToken = jwtTokenUtil.refreshToken(token);
+      //      return ResponseEntity.ok(new CurrentUser(refreshedToken, user));
+      //  } else {
+           return ResponseEntity.badRequest().body(null);
+      //  }
     }
 }

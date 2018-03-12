@@ -1,7 +1,5 @@
 package alis.store.infra.security;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
-
 import java.io.Serializable;
 
 public class JwtAuthenticationRequest implements Serializable{

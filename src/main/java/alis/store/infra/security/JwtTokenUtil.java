@@ -41,7 +41,7 @@ public class JwtTokenUtil implements Serializable {
         Claims claims;
         try {
             claims = Jwts.parser()
-                    .setSigningKey(this.secret)
+                    .setSigningKey(this.secret.getBytes())
                     .parseClaimsJws(token)
                     .getBody();
         } catch (Exception e) {
@@ -73,46 +73,12 @@ public class JwtTokenUtil implements Serializable {
                 .signWith(SignatureAlgorithm.HS512, secret.getBytes())
                 .compact();
     }
-/*    public String generateToken(UserDetails userDetails){
-        Map<String, Object> claims = new HashMap<>();
 
-        claims.put(CLAIM_KEY_USERNAME, userDetails.getUsername());
-
-        final Date createdDate = new Date();
-        claims.put(CLAIM_KEY_CREATED, createdDate);
-
-        return doGenerateToken(claims);
-    }*/
-
-    private String doGenerateToken(Map<String, Object> claims) {
-        final Date createdDate = (Date) claims.get(CLAIM_KEY_CREATED);
-        final Date expirationDate = new Date(createdDate.getTime() + expiration * 1000);
-        return Jwts.builder()
-                .setClaims(claims)
-                .setExpiration(expirationDate)
-                .signWith(SignatureAlgorithm.HS512, secret)
-                .compact();
-    }
-
-    public Boolean canTokenBeRefreshed(String token) {
-        return !isTokenExpired(token);
-    }
-
-    public String refreshToken(String token){
-        String refreshedToken;
-        try {
-            final Claims claims = getClaimsFromToken(token);
-            claims.put(CLAIM_KEY_CREATED, new Date());
-            refreshedToken = doGenerateToken(claims);
-        } catch (Exception e) {
-            refreshedToken = null;
+    public boolean isValid(String token) {
+        Claims claims = getClaimsFromToken(token);
+        if (claims != null && !isTokenExpired(token)) {
+            return true;
         }
-        return refreshedToken;
-    }
-
-    public Boolean validateToken(String token, UserDetails userDetails) {
-        JwtUser user = (JwtUser) userDetails;
-        final String username = getUserNameFromToken(token);
-        return username.equals(user.getUsername()) && !isTokenExpired(token);
+        return false;
     }
 }
