@@ -15,8 +15,8 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint, Se
 
     private static final long serialVersionUID = 1L;
 
-
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
-
+        httpServletResponse.sendError(httpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
     }
+
 }

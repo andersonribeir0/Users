@@ -17,7 +17,7 @@ public class User extends Entity{
     private EType Type;
     private String Password;
 
-    public User(String Password, Name Name, Address Address, Email Email, Document Document, EType Type) {
+    public User(Name Name, Address Address, Email Email, Document Document, EType Type, String Password) {
         this.Name = Name;
         this.Address = Address;
         this.Email = Email;
@@ -32,6 +32,11 @@ public class User extends Entity{
         this.Email = Email;
         this.Document = Document;
         this.Type = Type;
+        this.Password = null;
+    }
+
+    public void setPassword(String password) {
+        Password = password;
     }
 
     public String getPassword() {

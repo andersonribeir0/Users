@@ -5,12 +5,14 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class JwtTokenUtil implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -64,7 +66,14 @@ public class JwtTokenUtil implements Serializable {
         return expiration.before(new Date());
     }
 
-    public String generateToken(UserDetails userDetails){
+    public String generateToken(String username){
+        return Jwts.builder()
+                .setSubject(username)
+                .setExpiration(new Date(System.currentTimeMillis() + expiration))
+                .signWith(SignatureAlgorithm.HS512, secret.getBytes())
+                .compact();
+    }
+/*    public String generateToken(UserDetails userDetails){
         Map<String, Object> claims = new HashMap<>();
 
         claims.put(CLAIM_KEY_USERNAME, userDetails.getUsername());
@@ -73,7 +82,7 @@ public class JwtTokenUtil implements Serializable {
         claims.put(CLAIM_KEY_CREATED, createdDate);
 
         return doGenerateToken(claims);
-    }
+    }*/
 
     private String doGenerateToken(Map<String, Object> claims) {
         final Date createdDate = (Date) claims.get(CLAIM_KEY_CREATED);

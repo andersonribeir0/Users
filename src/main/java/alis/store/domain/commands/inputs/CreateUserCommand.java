@@ -11,4 +11,5 @@ public class CreateUserCommand implements ICommand {
     public String HomeAddress;
     public String BillingAddress;
     public EType Type;
+    public String Password;
 }

@@ -11,10 +11,16 @@ public enum EType {
     /**
      * This user has ready-only permission.
      */
-    User,
+    User(1),
 
     /**
      *This user has r/w permission.
      */
-    Admin,
+    Admin(2);
+
+    private final int value;
+
+    EType(int value){
+        this.value = value;
+    }
 }

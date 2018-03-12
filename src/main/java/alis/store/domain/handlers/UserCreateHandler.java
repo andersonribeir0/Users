@@ -19,19 +19,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserCreateHandler implements ICommandHandler<CreateUserCommand> {
-    
+
+
+    private BCryptPasswordEncoder Pe;
+
 	private IUserRepository Repository;
     
 	private List<String> Notifications;
-	
+
+
 	@Autowired
-    public UserCreateHandler(IUserRepository repository) {
+    public UserCreateHandler(IUserRepository repository, BCryptPasswordEncoder pe) {
         Repository = repository;
         Notifications = new ArrayList<>();
+        Pe = pe;
     }
 
     public ICommandResult Handle(CreateUserCommand command) throws Exception{
@@ -50,7 +56,7 @@ public class UserCreateHandler implements ICommandHandler<CreateUserCommand> {
             Name name = new Name(command.FirstName, command.LastName);
             Address address = new Address(command.BillingAddress, command.HomeAddress);
             Email email = new Email(command.Email);
-            User user = new User(name, address, email, document, command.Type);
+            User user = new User(name, address, email, document, command.Type, Pe.encode(command.Password));
             Repository.AddUser(user);
 
             CreateUserCommandResult result = new CreateUserCommandResult();

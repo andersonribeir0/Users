@@ -21,7 +21,7 @@ public class JwtUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String document) throws UsernameNotFoundException {
        User user = repository.getUserByDocument(document);
        if (user == null){
-           throw new UsernameNotFoundException(String.format("No user found wirh username '%s'."));
+           throw new UsernameNotFoundException(String.format("No user found with username '%s'."));
        } else {
            return JwtUserFactory.create(user);
        }

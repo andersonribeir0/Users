@@ -6,6 +6,8 @@ import alis.store.domain.handlers.UserCreateHandler;
 import alis.store.domain.repositories.IUserRepository;
 import alis.store.shared.commands.ICommandResult;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -13,8 +15,9 @@ import static org.mockito.Mockito.*;
 
 public class UserHandlerTest {
 
+    public BCryptPasswordEncoder Pe = mock(BCryptPasswordEncoder.class);
     public IUserRepository Repository = mock(IUserRepository.class);
-    public UserCreateHandler UserCreateHandler = new UserCreateHandler(Repository);
+    public UserCreateHandler UserCreateHandler = new UserCreateHandler(Repository, Pe);
 
     @Test
     public void Should_Return_Valid_Result_If_A_Valid_User_Is_Added() throws Exception {
@@ -26,6 +29,7 @@ public class UserHandlerTest {
         command.HomeAddress = command.BillingAddress;
         command.FirstName = "Anderson";
         command.LastName = "Ribeiro";
+        command.Password = Pe.encode("123456");
         command.Type = EType.Admin;
 
         when(Repository.CheckIfDocumentAlreadyExists(command.Document)).thenReturn(false);

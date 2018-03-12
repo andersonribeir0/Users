@@ -21,6 +21,7 @@ public class UserRepository implements IUserRepository {
         this.users = new ArrayList<>();
     }
 
+
     public boolean CheckIfEmailAlreadyExists(String email) {
         for (User user : users) {
             if (user.getEmail().toString().equals(email))
@@ -59,6 +60,8 @@ public class UserRepository implements IUserRepository {
             qUser.Email = user.getEmail().toString();
             qUser.Name = user.getName().toString();
             qUser.Id = user.getId();
+            qUser.Password = user.getPassword();
+            qUser.Type = user.getType().toString();
             allUsers.add(qUser);
         }
         return allUsers;
