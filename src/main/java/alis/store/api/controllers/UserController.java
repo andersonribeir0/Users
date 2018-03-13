@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import alis.store.domain.commands.inputs.CreateUserCommand;
@@ -44,6 +45,7 @@ public class UserController {
 	}
 	
     @RequestMapping(method = RequestMethod.POST)
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<ICommandResult> Add(@RequestBody @Valid CreateUserCommand command) {
     	try {
             ICommandResult commandResult = createHandler.Handle(command);
@@ -60,7 +62,7 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
 	    return new ResponseEntity<>(result, HttpStatus.OK);
-    }{}
+    }
 
     @RequestMapping(value = "/{document}", method = RequestMethod.GET)
     public ResponseEntity<QueryUsersResult> Get(@PathVariable String document){

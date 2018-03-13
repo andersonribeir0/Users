@@ -1,5 +1,6 @@
 package alis.store.infra.security.config;
 
+import alis.store.domain.enums.EType;
 import alis.store.infra.security.JwtAuthenticationTokenFilter;
 import alis.store.infra.security.JwtAuthorizationTokenFilter;
 import alis.store.infra.security.JwtTokenUtil;
@@ -25,7 +26,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
-    private static final String[] PUBLIC_MATCHERS = {
+    private static final String[] MATCHERS = {
             "/users/**",
 
     };
@@ -41,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         httpSecurity.cors().and().csrf().disable();
 
         httpSecurity.authorizeRequests()
-                .antMatchers(HttpMethod.GET, PUBLIC_MATCHERS).permitAll()
+                .antMatchers(HttpMethod.GET, MATCHERS).permitAll()
                 .anyRequest().authenticated();
 
         httpSecurity.addFilter(new JwtAuthenticationTokenFilter(authenticationManager(), jwtTokenUtil));
