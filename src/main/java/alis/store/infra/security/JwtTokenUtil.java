@@ -72,9 +72,6 @@ public class JwtTokenUtil implements Serializable {
 
     public boolean isValid(String token) {
         Claims claims = getClaimsFromToken(token);
-        if (claims != null && !isTokenExpired(token)) {
-            return true;
-        }
-        return false;
+        return claims != null && !isTokenExpired(token);
     }
 }
