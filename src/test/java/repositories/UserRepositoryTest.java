@@ -19,7 +19,7 @@ public class UserRepositoryTest {
     private Email email = new Email("abc@gmail.com");
     private Name name = new Name("Anderson","Ribeiro");
     private Address address = new Address("B Street", "A Street");
-    private User user = new User(name, address, email, document, EType.Admin);
+    private User user = new User(name, address, email, document, EType.ADMIN);
     private UserRepository repository = new UserRepository();
 
     @Test

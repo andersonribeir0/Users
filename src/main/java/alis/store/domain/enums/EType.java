@@ -11,12 +11,12 @@ public enum EType {
     /**
      * This user has ready-only permission.
      */
-    User(1),
+    USER(1),
 
     /**
      *This user has r/w permission.
      */
-    Admin(2);
+    ADMIN(2);
 
     private final int value;
 

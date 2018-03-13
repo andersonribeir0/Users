@@ -34,7 +34,7 @@ public class Application {
 		Email email = new Email("abc@gmail.com");
 		Name name = new Name("Anderson","Ribeiro");
 		Address address = new Address("B Street", "A Street");
-		User user = new User(name, address, email, document, EType.Admin, passwordEncoder.encode("123456"));
+		User user = new User(name, address, email, document, EType.ADMIN, passwordEncoder.encode("123456"));
 		userRepository.AddUser(user);
 	}
 

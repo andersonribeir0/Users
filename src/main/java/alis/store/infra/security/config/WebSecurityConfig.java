@@ -1,6 +1,5 @@
 package alis.store.infra.security.config;
 
-import alis.store.infra.security.JwtAuthenticationEntryPoint;
 import alis.store.infra.security.JwtAuthenticationTokenFilter;
 import alis.store.infra.security.JwtAuthorizationTokenFilter;
 import alis.store.infra.security.JwtTokenUtil;
@@ -10,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -22,6 +22,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
     private static final String[] PUBLIC_MATCHERS = {
@@ -33,15 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     private JwtTokenUtil jwtTokenUtil;
 
     @Autowired
-    private JwtAuthenticationEntryPoint unauthorizedHandler;
-
-    @Autowired
     private UserDetailsService userDetailsService;
-
-    @Autowired
-    public void configureAuthentication(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        authenticationManagerBuilder.userDetailsService(this.userDetailsService).passwordEncoder(bCryptPasswordEncoder());
-    }
 
      @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
@@ -75,9 +68,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .passwordEncoder(bCryptPasswordEncoder());
     }
 
-    @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
 }

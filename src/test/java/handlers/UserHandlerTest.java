@@ -30,7 +30,7 @@ public class UserHandlerTest {
         command.FirstName = "Anderson";
         command.LastName = "Ribeiro";
         command.Password = Pe.encode("123456");
-        command.Type = EType.Admin;
+        command.Type = EType.ADMIN;
 
         when(Repository.CheckIfDocumentAlreadyExists(command.Document)).thenReturn(false);
         when(Repository.CheckIfEmailAlreadyExists(command.Email)).thenReturn(false);
@@ -49,7 +49,7 @@ public class UserHandlerTest {
         command.HomeAddress = command.BillingAddress;
         command.FirstName = "Anderson";
         command.LastName = "Ribeiro";
-        command.Type = EType.Admin;
+        command.Type = EType.ADMIN;
 
         when(Repository.CheckIfDocumentAlreadyExists(command.Document)).thenReturn(false);
         when(Repository.CheckIfEmailAlreadyExists(command.Email)).thenReturn(false);
