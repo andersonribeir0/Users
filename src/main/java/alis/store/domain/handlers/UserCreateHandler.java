@@ -64,7 +64,8 @@ public class UserCreateHandler implements ICommandHandler<CreateUserCommand> {
             return result;
         }
 
-        String exceptionMessage = String.join(",",Notifications);
+        String exceptionMessage = String.join(" ", Notifications);
+        Notifications.clear();
         throw new Exception(exceptionMessage);
     }
 
