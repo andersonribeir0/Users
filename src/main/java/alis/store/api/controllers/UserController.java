@@ -12,6 +12,10 @@ import alis.store.domain.handlers.UserRemoveHandler;
 import alis.store.domain.handlers.UserUpdateHandler;
 import alis.store.domain.queries.QueryUsersResult;
 import alis.store.shared.commands.ICommand;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ResponseHeader;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
@@ -46,6 +50,7 @@ public class UserController {
 	
     @RequestMapping(method = RequestMethod.POST)
     @PreAuthorize("hasAuthority('ADMIN')")
+    @ApiOperation(value = "Add new user")
     public ResponseEntity<ICommandResult> Add(@RequestBody @Valid CreateUserCommand command) {
     	try {
             ICommandResult commandResult = createHandler.Handle(command);
@@ -56,6 +61,7 @@ public class UserController {
     }
     
     @RequestMapping(method = RequestMethod.GET)
+    @ApiOperation(value = "Get all users")
     public ResponseEntity<List<QueryUsersResult>> GetAll(){
 	    List<QueryUsersResult> result = repository.GetAll();
         if(result.isEmpty()){
@@ -65,6 +71,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/{document}", method = RequestMethod.GET)
+    @ApiOperation(value = "Get user by document")
     public ResponseEntity<QueryUsersResult> Get(@PathVariable String document){
         QueryUsersResult result = repository.GetByDocument(document);
         if (result == null){
@@ -74,6 +81,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/{document}", method = RequestMethod.DELETE)
+    @ApiOperation(value = "Delete user by document")
     public ResponseEntity<ICommandResult> Delete(@PathVariable String document){
         DeleteUserCommand command = new DeleteUserCommand(document);
         DeleteUserCommandResult result = (DeleteUserCommandResult) removeHandler.Handle(command);
@@ -84,6 +92,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    @ApiOperation(value = "Update user by id")
     public ResponseEntity<ICommandResult> Update(@PathVariable String id, @RequestBody @Valid UpdateUserCommand command) {
         try{
             QueryUsersResult query = repository.GetById(id);

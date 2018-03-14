@@ -3,6 +3,7 @@ package alis.store.api.controllers;
 import alis.store.infra.security.JwtTokenUtil;
 import alis.store.infra.security.JwtUser;
 import alis.store.infra.security.services.JwtUserService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ public class AuthController {
     private JwtTokenUtil jwtTokenUtil;
 
     @RequestMapping(value="refresh", method = RequestMethod.POST)
+    @ApiOperation("Update token")
     public ResponseEntity<?> refreshToken(HttpServletResponse response){
         JwtUser user = JwtUserService.authenticated();
         String token = jwtTokenUtil.generateToken(user.getUsername());
