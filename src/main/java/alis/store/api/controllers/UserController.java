@@ -6,6 +6,7 @@ import alis.store.domain.commands.inputs.DeleteUserCommand;
 import alis.store.domain.commands.inputs.UpdateUserCommand;
 import alis.store.domain.commands.outputs.DeleteUserCommandResult;
 import alis.store.domain.commands.outputs.UpdateUserCommandResult;
+import alis.store.domain.commands.outputs.ValidationErrorCommandResult;
 import alis.store.domain.entities.User;
 import alis.store.domain.handlers.UserCreateHandler;
 import alis.store.domain.handlers.UserRemoveHandler;
@@ -56,7 +57,8 @@ public class UserController {
             ICommandResult commandResult = createHandler.Handle(command);
             return new ResponseEntity<>(commandResult, HttpStatus.OK);
         }catch(Exception e){
-    	    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+    	    return new ResponseEntity<>(new ValidationErrorCommandResult(e.getMessage()), HttpStatus.BAD_REQUEST);
         }
     }
     
@@ -103,7 +105,7 @@ public class UserController {
             }
             return new ResponseEntity<>(result, HttpStatus.NO_CONTENT);
         }catch (Exception e){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ValidationErrorCommandResult(e.getMessage()), HttpStatus.BAD_REQUEST);
         }
 
     }
