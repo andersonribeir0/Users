@@ -15,6 +15,8 @@ Para executar a aplicação em container docker, basta seguir os passos a seguir
 
 # Executando
 
+Na raiz do projeto, executar o comando : `mvn package` 
+
 Para logar no sistema basta executar um POST com as seguintes credenciais: <br/>
 ```json
 {
